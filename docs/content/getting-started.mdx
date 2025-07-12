@@ -1,0 +1,203 @@
+# Getting Started with OpenAI Codex CLI
+
+Welcome to the OpenAI Codex CLI documentation! This guide will help you get up and running with Codex in just a few minutes.
+
+## What is Codex CLI?
+
+Codex CLI is a lightweight coding agent that runs in your terminal. It combines ChatGPT-level reasoning with the ability to:
+
+- Execute code and shell commands
+- Create and edit files
+- Run tests and iterate on solutions
+- Work with version control
+- All while maintaining security through sandboxing
+
+## Prerequisites
+
+Before you begin, ensure you have:
+
+- **Operating System**: macOS 12+, Ubuntu 20.04+/Debian 10+, or Windows 11 (via WSL2)
+- **Node.js**: Version 18+ (for npm installation)
+- **Git**: Version 2.23+ (optional but recommended)
+- **RAM**: 4GB minimum (8GB recommended)
+
+## Installation
+
+Choose your preferred installation method:
+
+### Using npm (Recommended)
+
+```bash
+npm install -g @openai/codex
+```
+
+### Using Homebrew (macOS)
+
+```bash
+brew install codex
+```
+
+### Direct Binary Download
+
+Download the latest binary from [GitHub Releases](https://github.com/openai/codex/releases/latest):
+
+```bash
+# Linux/macOS
+curl -L https://github.com/openai/codex/releases/latest/download/codex-$(uname -s)-$(uname -m) -o codex
+chmod +x codex
+sudo mv codex /usr/local/bin/
+
+# Verify installation
+codex --version
+```
+
+## Authentication
+
+Codex supports two authentication methods:
+
+### Option 1: OpenAI API Key
+
+If you have an OpenAI API key:
+
+```bash
+export OPENAI_API_KEY="your-api-key-here"
+```
+
+> **Tip**: Add this to your shell configuration file (e.g., `~/.zshrc` or `~/.bashrc`) to persist across sessions.
+
+### Option 2: OpenAI Account Login
+
+If you have an OpenAI Plus or Pro account:
+
+```bash
+codex login
+```
+
+This will open a browser window for authentication and save your credentials to `~/.codex/auth.json`.
+
+## Your First Codex Session
+
+### Interactive Mode
+
+Start an interactive session:
+
+```bash
+codex
+```
+
+You'll see a terminal UI where you can type prompts and interact with Codex in real-time.
+
+### Single Command Mode
+
+Run Codex with a specific task:
+
+```bash
+codex "create a Python script that generates fibonacci numbers"
+```
+
+### Full Auto Mode
+
+Let Codex work autonomously with sandboxed execution:
+
+```bash
+codex --full-auto "build a todo list web app with React"
+```
+
+## Understanding Approval Modes
+
+Codex offers different levels of autonomy:
+
+- **Suggest Mode** (default): Prompts for approval before each action
+- **Auto-Edit Mode**: Automatically approves file edits, prompts for commands
+- **Full-Auto Mode**: Runs everything in a sandbox, only prompts on failures
+
+```bash
+# Auto-approve file edits only
+codex --auto-edit "refactor this TypeScript code"
+
+# Full autonomous mode with sandboxing
+codex --full-auto "add unit tests to all components"
+```
+
+## Working with Images
+
+Codex supports multimodal inputs. Pass images to help with implementation:
+
+```bash
+codex -i screenshot.png "implement this UI design"
+codex --image mockup.jpg --image flow-diagram.png "build this feature"
+```
+
+## Project Documentation
+
+Codex automatically looks for `AGENTS.md` files to understand your project:
+
+1. `~/.codex/AGENTS.md` - Global instructions
+2. `./AGENTS.md` - Project-specific guidance
+3. `./path/to/feature/AGENTS.md` - Feature-specific context
+
+Example `AGENTS.md`:
+
+```markdown
+# Project Guidelines
+
+- Use TypeScript with strict mode
+- Follow ESLint configuration
+- Write tests for all new features
+- Use conventional commits
+```
+
+## Common Use Cases
+
+### 1. Code Refactoring
+
+```bash
+codex "refactor UserProfile component to use React hooks instead of class components"
+```
+
+### 2. Debugging
+
+```bash
+codex "debug why the login form is not submitting properly"
+```
+
+### 3. Test Generation
+
+```bash
+codex "write comprehensive unit tests for the auth module"
+```
+
+### 4. Documentation
+
+```bash
+codex "generate API documentation for all endpoints in routes/"
+```
+
+### 5. Code Reviews
+
+```bash
+codex "review this codebase for security vulnerabilities"
+```
+
+## Tips for Success
+
+1. **Be Specific**: Clear, detailed prompts yield better results
+2. **Iterative Approach**: Start with small tasks and build up
+3. **Use Context**: Reference specific files or functions
+4. **Leverage Project Docs**: Keep AGENTS.md files updated
+5. **Review Changes**: Always review generated code before committing
+
+## Next Steps
+
+- Explore [Configuration Options](/configuration) to customize Codex
+- Learn about [Security Features](/security) and sandboxing
+- Check out [Advanced Features](/features) like MCP integration
+- Read the [API Reference](/api) for programmatic usage
+
+## Getting Help
+
+- **GitHub Issues**: [Report bugs or request features](https://github.com/openai/codex/issues)
+- **Documentation**: You're already here!
+- **Community**: Join discussions on GitHub
+
+Happy coding with Codex! 🚀 
